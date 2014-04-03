@@ -1,7 +1,7 @@
 {
   "name": "uptime-slack",
-  "version": "0.0.1",
-  "description": "A slack webhooks plugin for Uptime",
+  "version": "0.0.3",
+  "description": "A slack.com webhook plugin for Uptime",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,13 +16,13 @@
     "slack"
   ],
   "author": {
-    "name": "Paul Dixon",
-    "email": "paul.dixon@mintbridge.co.uk"
+    "name": "Pavol Odlevak",
+    "email": "pavol@odlevak.org"
   },
   "contributors": [
     {
-      "name": "Pavol Odlevak",
-      "email": "pavol@odlevak.org"
+      "name": "Paul Dixon",
+      "email": "paul.dixon@mintbridge.co.uk"
     }
   ],
   "license": "MIT",
