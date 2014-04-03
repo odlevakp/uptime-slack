@@ -1,9 +1,11 @@
 Uptime Slack webhook plugin
-======================
+===========================
 
-This Uptime (https://github.com/fzaninotto/uptime) plugin notifies all configured events (up, down, paused, restarted) by sending a HTTPS POST request to to a slack.com URL.
+This [Uptime](https://github.com/fzaninotto/uptime) plugin notifies all configured events (up, down, paused, restarted) by sending a HTTPS POST request to a slack.com URL.
 
-To use the plugin, first install it using npm while in the Uptime directory:
+Based on [mintbridge/uptime-webhooks](https://github.com/mintbridge/uptime-webhooks) plugin.
+
+To use this plugin, first install it using npm while in the Uptime directory:
 
 ```sh
 $ npm install uptime-slack
