@@ -2,32 +2,37 @@
  * Webhooks plugin
  *
  * Notifies all events (up, down, paused, restarted) by sending a
- * HTTP POST request to the given URL. The request will have a
+ * HTTPS POST request to a slack.com URL. The request will have a
  * JSON payload of data from the event
  *
  * To enable the plugin, call init() from plugins/index.js
  *   exports.init = function() {
- *     require('./webhooks').init();
+ *     require('uptime-slack').init();
  *   }
  *
  * Example configuration
  *   webhooks:
  *     event:
  *       up:
- *         - 'http://localhost:8082'
- *         - 'http://www.example.com/do/something'
+ *         - 'https://xxxx.slack.com/services/hooks/incoming-webhook?token=xxxxxx'
  *       down:
- *         - 'http://www.example.com/warn/somebody'
+ *         - 'https://xxxx.slack.com/services/hooks/incoming-webhook?token=xxxxxx'
  *       paused:
+ *         - 'https://xxxx.slack.com/services/hooks/incoming-webhook?token=xxxxxx'
  *       restarted:
- *     dashboardUrl: 'http://localhost:8082'
+ *         - 'https://xxxx.slack.com/services/hooks/incoming-webhook?token=xxxxxx'
+ *     dashboardUrl: 'http://uptime.example.com'
+ *     channel:      '#slack-channel'
+ *     username:     'uptime'
+ *     icon_emoji:   ':fire:'
  */
 
-var http       = require('http');
+var https       = require('https');
 var url        = require('url');
 var util       = require('util');
 var config     = require('config');
 var CheckEvent = require('../../models/checkEvent');
+
 
 exports.init = function() {
   CheckEvent.on('afterInsert', function(checkEvent) {
@@ -38,14 +43,10 @@ exports.init = function() {
     checkEvent.findCheck(function(err, check) {
         var payload = {};
         if (err) return console.error(err);
-
-        payload.name      = check.name;
-        payload.url       = check.url;
-        payload.details   = checkEvent.details;
-        payload.message   = checkEvent.message;
-        payload.dashboard = webhooks.dashboardUrl + '/dashboard/checks/' + check._id + '?type=hour&date=' + checkEvent.timestamp.valueOf();
-        payload.tags      = check.tags;
-        payload.timestamp = checkEvent.timestamp;
+        payload.channel     = webhooks.channel;
+        payload.username    = webhooks.username;
+        payload.text        = '<' + webhooks.dashboardUrl + '/dashboard/checks/' + check._id + '?type=hour&date=' + checkEvent.timestamp.valueOf() + '|' + check.name +'>' + ' ' + checkEvent.message;
+        payload.icon_emoji  = webhooks.icon_emoji;
 
         hrefs.forEach(function(href) {
             var options = url.parse(href);
@@ -54,7 +55,7 @@ exports.init = function() {
                 'Content-Type' : 'application/json'
             };
 
-            var req = http.request(options, function(res) {
+            var req = https.request(options, function(res) {
 
             });
 
@@ -68,5 +69,5 @@ exports.init = function() {
 
     });
   });
-  console.log('Enabled webhooks plugin');
+  console.log('Enabled slack.com webhook plugin');
 };

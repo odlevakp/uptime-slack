@@ -1,23 +1,30 @@
 {
-  "name": "uptime-webhooks",
+  "name": "uptime-slack",
   "version": "0.0.1",
-  "description": "A webhooks plugin for Uptime",
+  "description": "A slack webhooks plugin for Uptime",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mintbridge/uptime-webhooks.git"
+    "url": "git://github.com/odlevakp/uptime-slack.git"
   },
   "keywords": [
     "uptime",
-    "webhooks"
+    "webhooks",
+    "slack"
   ],
   "author": {
     "name": "Paul Dixon",
     "email": "paul.dixon@mintbridge.co.uk"
   },
+  "contributors": [
+    {
+      "name": "Pavol Odlevak",
+      "email": "pavol@odlevak.org"
+    }
+  ],
   "license": "MIT",
   "readmeFilename": "README.md"
 }
