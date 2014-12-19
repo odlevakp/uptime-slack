@@ -1,6 +1,6 @@
 {
   "name": "uptime-slack",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A slack.com webhook plugin for Uptime",
   "main": "index.js",
   "scripts": {
